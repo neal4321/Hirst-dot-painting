@@ -1,0 +1,40 @@
+import turtle
+from turtle import Turtle, Screen
+from random import choice
+import colorgram
+
+tim = Turtle()
+tim.speed("fastest")
+turtle.colormode(255)
+colours = colorgram.extract('image.jpg', 10)
+tim.hideturtle()
+
+
+def random_colour():
+    return choice(colours).rgb
+
+
+def print_row(size):
+    tim.pensize(size*2)
+    for i in range(10):
+        tim.pd()
+        tim.color(random_colour())
+        tim.dot(size)
+        tim.pu()
+        tim.forward(size*2.5)
+
+
+def paint(unit):
+    row_pos = -250
+    for run in range(10):
+        tim.pu()
+        tim.goto(-300, row_pos)
+        tim.setheading(0)
+        print_row(unit)
+        row_pos += 50
+
+
+paint(20)
+
+screen = Screen()
+screen.exitonclick()
